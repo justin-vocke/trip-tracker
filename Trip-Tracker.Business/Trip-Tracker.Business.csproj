@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>TripTracker.Business</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="DTO\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TripTracker.Data\TripTracker.Data.csproj" />
+  </ItemGroup>
+
+</Project>
