@@ -4,8 +4,7 @@ using TripTracker.Data.Models;
 
 namespace TripTracker.Server.Controllers
 {
-    public class TripController
-    {
+    
         [Route("api/[controller]")]
         [ApiController]
         public class TripsController : ControllerBase
@@ -35,5 +34,5 @@ namespace TripTracker.Server.Controllers
                 }
             }
         }
-    }
+    
 }

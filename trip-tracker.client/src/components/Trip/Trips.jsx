@@ -1,9 +1,20 @@
 import { useState, useEffect } from "react";
-
+import axios from "axios";
 export const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(loading);
+
+  useEffect(() => {
+    populateTripsData();
+  }, []);
+
+  const populateTripsData = () => {
+    axios.get("https://localhost:7093/api/Trips/GetTrips").then((res) => {
+      const response = res.data;
+      setTrips(response);
+      setLoading(false);
+    });
+  };
   const renderAllTripsTable = (trips) => {
     return (
       <table className="table table-striped">
@@ -17,14 +28,15 @@ export const Trips = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {trips.map(trip => ( */}
-          <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-          </tr>
+          {trips.map((trip) => (
+            <tr key={trip.id}>
+              <td>{trip.name}</td>
+              <td>{trip.description}</td>
+              <td>{trip.dateStarted}</td>
+              <td>{trip.dateCompleted}</td>
+              <td>a</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
@@ -55,11 +67,4 @@ export const Trips = () => {
       {contents}
     </div>
   );
-
-  // populateTripsData() {
-  //   axios.get("api/Trips/GetTrips").then(res => {
-  //     const response = res.data;
-  //     this.setState({ trips: response, loading: false });
-  //   });
-  // }
 };
