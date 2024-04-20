@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const Trips = () => {
+export const Trips = () => {
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(false);
+  console.log(loading);
   const renderAllTripsTable = (trips) => {
     return (
       <table className="table table-striped">
@@ -43,7 +43,7 @@ const Trips = () => {
       <em>Loading...</em>
     </p>
   ) : (
-    trips.length && renderAllTripsTable(trips)
+    renderAllTripsTable(trips)
 
     // this.renderAllTripsTable(this.state.trips)
   );
@@ -63,5 +63,3 @@ const Trips = () => {
   //   });
   // }
 };
-
-export default Trips;

@@ -27,15 +27,20 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-body-tertiary nav-container">
         <Container>
           <Navbar.Brand href="/" to="/">
             TTMApp
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="m-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav.Link href="/" to="/">
+                Home
+              </Nav.Link>
+              <Nav.Link href="/trips" to="/trips">
+                Trips
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
