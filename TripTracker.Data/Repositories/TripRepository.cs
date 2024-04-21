@@ -33,9 +33,18 @@ namespace TripTracker.Data.Repositories
             return await _tripsContext.Trips.ToListAsync();
         }
 
-        public Task UpdateTripAsync(int tripId, Trip trip)
+        public async Task UpdateTripAsync(int tripId, Trip trip)
         {
-            throw new NotImplementedException();
+            var currentTrip = await _tripsContext.Trips.FirstOrDefaultAsync(x => x.Id == tripId);
+            if (currentTrip != null)
+            {
+                currentTrip.Name = trip.Name;
+                currentTrip.Description = trip.Description;
+                currentTrip.DateStarted = trip.DateStarted;
+                currentTrip.DateCompleted = trip.DateCompleted;
+            }
+
+            await _tripsContext.SaveChangesAsync();
         }
 
     }

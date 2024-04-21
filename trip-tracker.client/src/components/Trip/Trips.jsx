@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  let navigateTo = useNavigate();
   useEffect(() => {
     populateTripsData();
   }, []);
@@ -14,6 +15,10 @@ export const Trips = () => {
       setTrips(response);
       setLoading(false);
     });
+  };
+
+  const onTripUpdate = (id) => {
+    navigateTo("/update/" + id);
   };
   const renderAllTripsTable = (trips) => {
     return (
@@ -38,7 +43,16 @@ export const Trips = () => {
                   ? new Date(trip.dateCompleted).toLocaleDateString()
                   : "-"}
               </td>
-              <td>a</td>
+              <td>
+                <div className="form-group">
+                  <button
+                    onClick={() => onTripUpdate(trip.id)}
+                    className="btn btn-success"
+                  >
+                    Update
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

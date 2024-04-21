@@ -22,7 +22,14 @@ namespace TripTracker.Server.Controllers
                 return Ok(trips);
             }
 
-            [HttpPost("AddTrip")]
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetTrip(int id)
+        {
+            var trips = await _tripService.GetTripAsync(id);
+            return Ok(trips);
+        }
+
+        [HttpPost("AddTrip")]
             public async Task<IActionResult> AddTrip([FromBody] Trip trip)
             {
                 if (trip is null) return BadRequest("Invalid request. Please try again.");
@@ -33,6 +40,16 @@ namespace TripTracker.Server.Controllers
                     return Ok();
                 }
             }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateTrip(int id, Trip trip)
+        {
+            await _tripService.UpdateTripAsync(id, trip);
+            return Ok();
         }
+
+    }
+
     
+
 }

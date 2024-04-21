@@ -21,7 +21,7 @@ namespace TripTracker.Business.Services
              await _tripRepository.AddTripAsync(trip);
         }
 
-        public async Task<Trip> GetTripAsync(int id)
+        public async Task<Trip?> GetTripAsync(int id)
         {
             return await _tripRepository.GetTripAsync(id);
         }
@@ -29,6 +29,11 @@ namespace TripTracker.Business.Services
         public async Task<List<Trip>> GetTripsAsync()
         {
             return await _tripRepository.GetTripsAsync();
+        }
+
+        public async Task UpdateTripAsync(int tripId, Trip trip)
+        {
+            await _tripRepository.UpdateTripAsync(tripId, trip);
         }
     }
 }

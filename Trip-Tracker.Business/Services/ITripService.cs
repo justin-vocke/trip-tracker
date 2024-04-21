@@ -10,9 +10,10 @@ namespace TripTracker.Business.Services
 {
     public interface ITripService
     {
-        Task<Trip> GetTripAsync(int id);
+        Task<Trip?> GetTripAsync(int id);
         Task<List<Trip>> GetTripsAsync();
         Task AddTripAsync(Trip trip);
+        Task UpdateTripAsync(int tripId, Trip trip);
         
     }
 }
