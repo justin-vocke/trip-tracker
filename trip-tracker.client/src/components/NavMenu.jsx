@@ -41,6 +41,9 @@ export class NavMenu extends Component {
               <Nav.Link href="/trips" to="/trips">
                 Trips
               </Nav.Link>
+              <Nav.Link href="/create" to="/create">
+                Create
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

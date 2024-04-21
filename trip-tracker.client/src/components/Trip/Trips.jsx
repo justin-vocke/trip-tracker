@@ -32,8 +32,12 @@ export const Trips = () => {
             <tr key={trip.id}>
               <td>{trip.name}</td>
               <td>{trip.description}</td>
-              <td>{trip.dateStarted}</td>
-              <td>{trip.dateCompleted}</td>
+              <td>{new Date(trip.dateStarted).toLocaleDateString()}</td>
+              <td>
+                {trip.dateCompleted
+                  ? new Date(trip.dateCompleted).toLocaleDateString()
+                  : "-"}
+              </td>
               <td>a</td>
             </tr>
           ))}

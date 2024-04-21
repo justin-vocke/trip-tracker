@@ -15,6 +15,7 @@ namespace TripTracker.Data.Repositories
         public async Task AddTripAsync(Trip trip)
         {
             await _tripsContext.AddAsync(trip);
+            await _tripsContext.SaveChangesAsync();
         }
 
         public Task DeleteTripAsync(int id)
