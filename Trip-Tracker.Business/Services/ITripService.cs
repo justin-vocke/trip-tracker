@@ -14,6 +14,7 @@ namespace TripTracker.Business.Services
         Task<List<Trip>> GetTripsAsync();
         Task AddTripAsync(Trip trip);
         Task UpdateTripAsync(int tripId, Trip trip);
+        Task DeleteTripAsync(int tripId);
         
     }
 }

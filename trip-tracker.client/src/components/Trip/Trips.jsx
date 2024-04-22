@@ -21,6 +21,10 @@ export const Trips = () => {
   const onTripUpdate = (id) => {
     navigateTo("/update/" + id);
   };
+
+  const onTripDelete = (id) => {
+    navigateTo("/delete/" + id);
+  };
   const renderAllTripsTable = (trips) => {
     return (
       <table className="table table-striped">
@@ -46,12 +50,18 @@ export const Trips = () => {
               </td>
               <td>
                 <div className="form-group">
-                  <button
-                    onClick={() => onTripUpdate(trip.id)}
+                  <input
+                    type="button"
+                    value="Update"
                     className="btn btn-success"
-                  >
-                    Update
-                  </button>
+                    onClick={() => onTripUpdate(trip.id)}
+                  />
+                  <input
+                    type="button"
+                    value="Delete"
+                    className="btn btn-danger"
+                    onClick={() => onTripDelete(trip.id)}
+                  />
                 </div>
               </td>
             </tr>

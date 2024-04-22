@@ -21,6 +21,11 @@ namespace TripTracker.Business.Services
              await _tripRepository.AddTripAsync(trip);
         }
 
+        public async Task DeleteTripAsync(int tripId)
+        {
+            await _tripRepository.DeleteTripAsync(tripId);
+        }
+
         public async Task<Trip?> GetTripAsync(int id)
         {
             return await _tripRepository.GetTripAsync(id);

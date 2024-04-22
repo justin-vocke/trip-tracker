@@ -48,6 +48,12 @@ namespace TripTracker.Server.Controllers
             return Ok();
         }
 
+        [HttpDelete("DeleteTrip/{id}")]
+        public async Task<IActionResult> DeleteTrip(int id)
+        {
+            await _tripService.DeleteTripAsync(id);
+            return Ok();
+        }
     }
 
     

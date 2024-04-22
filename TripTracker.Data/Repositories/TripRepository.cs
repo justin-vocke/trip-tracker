@@ -18,10 +18,6 @@ namespace TripTracker.Data.Repositories
             await _tripsContext.SaveChangesAsync();
         }
 
-        public Task DeleteTripAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Trip?> GetTripAsync(int id)
         {
@@ -44,6 +40,16 @@ namespace TripTracker.Data.Repositories
                 currentTrip.DateCompleted = trip.DateCompleted;
             }
 
+            await _tripsContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteTripAsync(int tripId)
+        {
+            var currentTrip = await _tripsContext.Trips.FirstOrDefaultAsync(x => x.Id == tripId);
+            if(currentTrip != null)
+            {
+                _tripsContext.Remove(currentTrip);
+            }
             await _tripsContext.SaveChangesAsync();
         }
 
