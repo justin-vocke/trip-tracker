@@ -41,7 +41,7 @@ namespace TripTracker.Server.Controllers
                 }
             }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("UpdateTrip/{id}")]
         public async Task<IActionResult> UpdateTrip(int id, Trip trip)
         {
             await _tripService.UpdateTripAsync(id, trip);

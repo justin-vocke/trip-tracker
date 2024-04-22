@@ -24,7 +24,7 @@ export const Update = (props) => {
       setDateStarted(new Date(response.dateStarted).toISOString().slice(0, 10));
       setDateCompleted(
         response.dateCompleted
-          ? new Date(response.dateStarted).toISOString().slice(0, 10)
+          ? new Date(response.dateCompleted).toISOString().slice(0, 10)
           : null
       );
     });

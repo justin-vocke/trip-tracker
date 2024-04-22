@@ -5,6 +5,7 @@ export const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
   let navigateTo = useNavigate();
+
   useEffect(() => {
     populateTripsData();
   }, []);
@@ -37,10 +38,10 @@ export const Trips = () => {
             <tr key={trip.id}>
               <td>{trip.name}</td>
               <td>{trip.description}</td>
-              <td>{new Date(trip.dateStarted).toLocaleDateString()}</td>
+              <td>{new Date(trip.dateStarted).toISOString().slice(0, 10)}</td>
               <td>
                 {trip.dateCompleted
-                  ? new Date(trip.dateCompleted).toLocaleDateString()
+                  ? new Date(trip.dateCompleted).toISOString().slice(0, 10)
                   : "-"}
               </td>
               <td>
@@ -60,22 +61,12 @@ export const Trips = () => {
     );
   };
 
-  // let contents = this.props.loading ? (
-  //   <p>
-  //     <em>Loading...</em>
-  //   </p>
-  // ) : (
-  //   this.renderAllTripsTable(this.state.trips)
-  // );
-
   let contents = loading ? (
     <p>
       <em>Loading...</em>
     </p>
   ) : (
     renderAllTripsTable(trips)
-
-    // this.renderAllTripsTable(this.state.trips)
   );
 
   return (
