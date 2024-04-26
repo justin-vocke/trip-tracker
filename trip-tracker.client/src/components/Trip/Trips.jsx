@@ -1,36 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectAllTrips, getAllTrips } from "../../features/trip/tripSlice";
 import axios from "axios";
 export const Trips = () => {
-  const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const [error, setError] = useState("");
   let navigateTo = useNavigate();
-
+  const dispatch = useDispatch();
+  const allTrips = useSelector(selectAllTrips);
+  const tripStatus = useSelector((state) => state.trips.status);
+  const error = useSelector((state) => state.trips.error);
   useEffect(() => {
-    populateTripsData();
-  }, []);
-
-  const populateTripsData = async () => {
-    try {
-      const res = await axios.get("https://localhost:7093/api/Trips/GetTrips");
-      const response = res.data;
-      setTrips(response);
-      setLoading(false);
-      if (failed == true) {
-        setFailed(false);
-      }
-      if (error !== "") {
-        setError("");
-      }
-    } catch (err) {
-      setFailed(true);
-      setError(
-        "Error loading trips. Please refresh the page. If the error persists, please contact us at ohno@ohnooooo.com"
-      );
-    }
-  };
+    if (tripStatus === "idle") dispatch(getAllTrips());
+  }, [tripStatus, dispatch]);
 
   const onTripUpdate = (id) => {
     navigateTo("/update/" + id);
@@ -84,22 +65,24 @@ export const Trips = () => {
       </table>
     );
   };
-
-  let contents = loading ? (
-    <p>
-      <em>Loading...</em>
-    </p>
-  ) : failed ? (
-    <div className="text-danger">{error}</div>
-  ) : (
-    renderAllTripsTable(trips)
-  );
+  let content;
+  if (tripStatus === "loading") {
+    content = (
+      <p>
+        <em>Loading...</em>
+      </p>
+    );
+  } else if (tripStatus === "succeeded") {
+    content = renderAllTripsTable(allTrips);
+  } else if (tripStatus === "failed") {
+    content = <div>{error}</div>;
+  }
 
   return (
     <div>
       <h1>All trips</h1>
       <p>Here you will see a list of all trips.</p>
-      {contents}
+      {content}
     </div>
   );
 };
