@@ -18,8 +18,16 @@ namespace TripTracker.Server.Controllers
             [HttpGet("GetTrips")]
             public async Task<IActionResult> GetTrips()
             {
+            try
+            {
                 var trips = await _tripService.GetTripsAsync();
                 return Ok(trips);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+                
             }
 
         [HttpGet("{id:int}")]

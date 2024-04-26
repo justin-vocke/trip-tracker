@@ -4,18 +4,32 @@ import axios from "axios";
 export const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [error, setError] = useState("");
   let navigateTo = useNavigate();
 
   useEffect(() => {
     populateTripsData();
   }, []);
 
-  const populateTripsData = () => {
-    axios.get("https://localhost:7093/api/Trips/GetTrips").then((res) => {
+  const populateTripsData = async () => {
+    try {
+      const res = await axios.get("https://localhost:7093/api/Trips/GetTrips");
       const response = res.data;
       setTrips(response);
       setLoading(false);
-    });
+      if (failed == true) {
+        setFailed(false);
+      }
+      if (error !== "") {
+        setError("");
+      }
+    } catch (err) {
+      setFailed(true);
+      setError(
+        "Error loading trips. Please refresh the page. If the error persists, please contact us at ohno@ohnooooo.com"
+      );
+    }
   };
 
   const onTripUpdate = (id) => {
@@ -75,6 +89,8 @@ export const Trips = () => {
     <p>
       <em>Loading...</em>
     </p>
+  ) : failed ? (
+    <div className="text-danger">{error}</div>
   ) : (
     renderAllTripsTable(trips)
   );
